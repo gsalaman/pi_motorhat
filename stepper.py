@@ -4,7 +4,7 @@ from adafruit_motor import stepper
 
 kit = MotorKit()
 
-#our steppers have 200 steps per rotation
+# our steppers have 200 steps per rotation
 steps_per_rotation = 200
 
 # In our loop, I'm going to rotate the steppers in opposite directions, but
@@ -16,6 +16,10 @@ s2_dir = stepper.BACKWARD
 try:
   while True:
     
+    # stepper1 will be doing interleave...that doubles the number of steps,
+    # therefore we'll be doing two steps every time through the loop.
+    # stepper2 is going to be using "double"...which is a full step powering
+    # both coils (so more torque)
     for steps in range(steps_per_rotation):
       kit.stepper1.onestep(direction = s1_dir, style=stepper.INTERLEAVE)
       kit.stepper1.onestep(direction = s1_dir, style=stepper.INTERLEAVE)
